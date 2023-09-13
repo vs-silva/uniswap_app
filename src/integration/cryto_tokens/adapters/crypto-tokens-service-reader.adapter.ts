@@ -7,6 +7,7 @@ import type {ApiEngineConfigDTO} from "../../../engines/api-engine/api-engine-co
 import EventBusEngine from "../../../engines/event-bus-engine/index.ts";
 import {CryptoTokensEventTypeConstants} from "../core/constants/crypto-tokens-event-type.constants.ts";
 import {CryptoTokensResourceConstants} from "../core/constants/crypto-tokens-resource.constants.ts";
+import {CryptoTokensResponseRequestedFieldsConstants} from "../core/constants/crypto-tokens-response-requested-fields.constants.ts";
 
 export function CryptoTokensServiceReaderAdapter(): CryptoTokensServiceReaderDrivenPorts {
 
@@ -21,7 +22,7 @@ export function CryptoTokensServiceReaderAdapter(): CryptoTokensServiceReaderDri
     async function get(dto: CryptoTokensRequestQueryDTO): Promise<CryptoTokensResponseDTO[] | null> {
         try {
             const response = await engine.post(CryptoTokensResourceConstants.PROVIDER_ENDPOINT,dto);
-            return response['data']['data']['tokens'] as CryptoTokensResponseDTO[];
+            return response[CryptoTokensResponseRequestedFieldsConstants.DATA][CryptoTokensResponseRequestedFieldsConstants.DATA][CryptoTokensResponseRequestedFieldsConstants.TOKENS] as CryptoTokensResponseDTO[];
         } catch (error) {
             return null;
         }
