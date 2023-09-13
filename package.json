@@ -11,6 +11,7 @@
     "test:cov": "vitest run --environment jsdom --coverage"
   },
   "dependencies": {
+    "axios": "^1.5.0",
     "joi": "^17.10.1",
     "mitt": "^3.0.1",
     "pinia": "^2.1.6",
