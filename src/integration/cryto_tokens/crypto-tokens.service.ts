@@ -8,7 +8,6 @@ export function CryptoTokensService(reader: CryptoTokensServiceReaderDrivenPorts
 
     async function getCryptoTokens(dto: CryptoTokensRequestDTO): Promise<CryptoTokenDTO[] | null> {
         try {
-
             const requestQueryDTO = cryptoTokensGenerateRequestQueryUtil(dto);
             const result = await reader.get(requestQueryDTO);
 
