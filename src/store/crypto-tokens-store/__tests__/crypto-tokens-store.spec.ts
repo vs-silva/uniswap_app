@@ -8,7 +8,7 @@ describe('Store: Crypto tokens store tests', () => {
 
     setActivePinia(createPinia());
     const cryptoTokensStore = Store.useCryptoTokensStore();
-    const { cryptoTokens } = storeToRefs(cryptoTokensStore);
+    const { defaultRequestAmount, cryptoTokens } = storeToRefs(cryptoTokensStore);
     const { getCryptoTokens } = cryptoTokensStore;
 
     test('getCryptoTokens should make a default request of 5 crypto tokens and then cryptoTokens collection with the return data', async () => {
@@ -19,6 +19,9 @@ describe('Store: Crypto tokens store tests', () => {
         expect(cryptoTokens).toBeDefined();
         expect(cryptoTokens.value).toBeNull();
 
+        expect(defaultRequestAmount).toBeDefined();
+        expect(defaultRequestAmount.value).toEqual(10);
+
         const spy = vi.fn(getCryptoTokens);
         await spy();
 
@@ -26,7 +29,7 @@ describe('Store: Crypto tokens store tests', () => {
         expect(spy).toHaveBeenCalledWith();
 
         expect(cryptoTokens.value).toBeDefined();
-        expect(cryptoTokens.value?.length).toEqual(5);
+        expect(cryptoTokens.value?.length).toEqual(defaultRequestAmount.value);
 
         expect(cryptoTokens.value).toStrictEqual(expect.arrayContaining(<CryptoTokenDTO[]>[expect.objectContaining(<CryptoTokenDTO>{
             id: expect.any(String),

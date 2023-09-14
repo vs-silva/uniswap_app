@@ -4,6 +4,7 @@ import Messages from "./messages";
 const defaultLanguage = 'en';
 
 const engine = createI18n({
+    legacy: false,
     locale: defaultLanguage,
     fallbackLocale: defaultLanguage,
     globalInjection: true,
