@@ -1,4 +1,4 @@
-import {describe, expect, it, vi} from "vitest";
+import {describe, expect, test, vi} from "vitest";
 import {faker} from "@faker-js/faker";
 import {CryptoTokensOrderDirectionConstants} from "../core/constants/crypto-tokens-order-direction.constants.ts";
 import {CryptoTokensOrderByConstants} from "../core/constants/crypto-tokens-order-by.constants.ts";
@@ -6,11 +6,11 @@ import type {CryptoTokenDTO} from "../core/dtos/crypto-token.dto.ts";
 import type {CryptoTokensRequestDTO} from "../core/dtos/crypto-tokens-request.dto.ts";
 import CryptoTokens from "../index.ts";
 
-describe('Crypto-Tokens service tests', () => {
+describe('Integration: Crypto-Tokens service tests', () => {
 
     const idRegex: RegExp = /^0x[a-f0-9]{40}$/;
 
-    const cryptTokenRequestDTO = <CryptoTokensRequestDTO>{
+    const cryptoTokenRequestDTO = <CryptoTokensRequestDTO>{
         name: '',
         orderBy: CryptoTokensOrderByConstants.TOTAL_VALUE_LOCKED_USD,
         orderDirection: CryptoTokensOrderDirectionConstants.DESCENDING,
@@ -20,19 +20,19 @@ describe('Crypto-Tokens service tests', () => {
 
     describe('getCryptoTokens port tests', () => {
 
-        it('getCryptoTokens should return a collection of CryptoTokens with the requested amount', async () => {
+        test('getCryptoTokens should return a collection of CryptoTokens with the requested amount', async () => {
 
             expect(CryptoTokens.getCryptoTokens).toBeDefined();
             expect(CryptoTokens.getCryptoTokens).toBeInstanceOf(Function);
 
-            cryptTokenRequestDTO.amount = faker.number.int({min: 2, max: 10});
-            cryptTokenRequestDTO.skip = faker.number.int({min: 0, max: cryptTokenRequestDTO.amount});
+            cryptoTokenRequestDTO.amount = faker.number.int({min: 2, max: 10});
+            cryptoTokenRequestDTO.skip = faker.number.int({min: 0, max: cryptoTokenRequestDTO.amount});
 
             const spy = vi.spyOn(CryptoTokens, 'getCryptoTokens');
-            const result = await CryptoTokens.getCryptoTokens(cryptTokenRequestDTO);
+            const result = await CryptoTokens.getCryptoTokens(cryptoTokenRequestDTO);
 
             expect(spy).toHaveBeenCalledOnce();
-            expect(spy).toHaveBeenCalledWith(cryptTokenRequestDTO);
+            expect(spy).toHaveBeenCalledWith(cryptoTokenRequestDTO);
 
             expect(result).toBeTruthy();
 
