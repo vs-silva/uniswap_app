@@ -1,5 +1,5 @@
 import {afterAll, beforeAll, describe, expect, test} from "vitest";
-import {cleanup, fireEvent, render, RenderResult} from "@testing-library/vue";
+import {cleanup, render, RenderResult} from "@testing-library/vue";
 import {faker} from "@faker-js/faker";
 import TableComponent from "../index.vue";
 import type {CryptoTokenDTO} from "../../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
@@ -61,7 +61,7 @@ describe("Components: Table component tests", () => {
             expect(headColumn.id).toMatch(idRegex);
         })
 
-
+        //missing render the table body
 
         component.debug();
 
