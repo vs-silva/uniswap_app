@@ -1,7 +1,11 @@
 <template>
   <div>
     <p>{{loading}}</p>
-    <table-component />
+
+    <table-component
+        :cryptoTokens="cryptoTokens"
+    />
+    
   </div>
 </template>
 
