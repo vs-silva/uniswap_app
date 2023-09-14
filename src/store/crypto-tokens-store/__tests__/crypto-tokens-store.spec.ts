@@ -11,7 +11,7 @@ describe('Store: Crypto tokens store tests', () => {
     const { cryptoTokens } = storeToRefs(cryptoTokensStore);
     const { getCryptoTokens } = cryptoTokensStore;
 
-    test('getCryptoTokens should make a default request of 10 crypto tokens and then cryptoTokens collection with the return data', async () => {
+    test('getCryptoTokens should make a default request of 5 crypto tokens and then cryptoTokens collection with the return data', async () => {
 
         expect(getCryptoTokens).toBeDefined();
         expect(getCryptoTokens).toBeInstanceOf(Function);
@@ -26,6 +26,7 @@ describe('Store: Crypto tokens store tests', () => {
         expect(spy).toHaveBeenCalledWith();
 
         expect(cryptoTokens.value).toBeDefined();
+        expect(cryptoTokens.value?.length).toEqual(5);
 
         expect(cryptoTokens.value).toStrictEqual(expect.arrayContaining(<CryptoTokenDTO[]>[expect.objectContaining(<CryptoTokenDTO>{
             id: expect.any(String),

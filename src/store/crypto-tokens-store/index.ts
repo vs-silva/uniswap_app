@@ -14,7 +14,7 @@ export function CryptoTokensStore() {
         name: '',
         orderBy: CryptoTokensOrderByConstants.TOTAL_VALUE_LOCKED_USD,
         orderDirection: CryptoTokensOrderDirectionConstants.DESCENDING,
-        amount: 10,
+        amount: 5,
         skip: 0
     });
 
