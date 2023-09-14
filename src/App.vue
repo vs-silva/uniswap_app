@@ -1,8 +1,7 @@
 <template>
   <div>
     <p>{{loading}}</p>
-    <p>{{$t('hello')}}</p>
-    <p>{{cryptoTokens}}</p>
+    <table-component />
   </div>
 </template>
 
@@ -11,9 +10,9 @@ import {ref, onBeforeMount, onDeactivated} from "@vue/runtime-core";
 import Store from "./store";
 import {storeToRefs} from "pinia";
 import EventBusEngine from "./engines/event-bus-engine";
-import {
-  CryptoTokensEventTypeConstants
-} from "./integration/cryto_tokens/core/constants/crypto-tokens-event-type.constants.ts";
+import {CryptoTokensEventTypeConstants} from "./integration/cryto_tokens/core/constants/crypto-tokens-event-type.constants.ts";
+//--//
+import TableComponent from "./components/table-component/index.vue";
 
 const loading = ref<boolean>(false);
 
