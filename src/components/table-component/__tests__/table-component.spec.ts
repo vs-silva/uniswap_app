@@ -51,6 +51,7 @@ describe("Components: Table component tests", () => {
 
         const headColumnRow = component.getByTestId('table-component-head-column-row');
         const headColumns = component.getAllByTestId('table-component-head-column');
+        const bodyRows = component.getAllByTestId('table-component-body-row');
 
         expect(headColumnRow).toBeDefined();
         expect(headColumns).toBeDefined();
@@ -59,11 +60,22 @@ describe("Components: Table component tests", () => {
         headColumns.forEach(headColumn => {
             expect(headColumn.id).toBeDefined();
             expect(headColumn.id).toMatch(idRegex);
-        })
+        });
 
-        //missing render the table body
+        expect(bodyRows).toBeDefined();
+        expect(bodyRows.length).toEqual(fakeCryptoTokensCollection.length);
 
-        component.debug();
+        for (let i = 0; i < bodyRows.length; i++) {
+            const bodyRow = bodyRows[i];
+            const cryptoToken = fakeCryptoTokensCollection[i];
+            expect(bodyRow.id).toEqual(cryptoToken.id);
+
+            const bodyRowCells = (bodyRow as HTMLElement).children;
+
+            for (let j = 0; j < bodyRowCells.length; j++) {
+                expect(bodyRowCells[j].textContent).toEqual(cryptoToken[j === 0 ? 'name' : j === 1 ? 'symbol' : j === 2 ? 'totalSupplyAmount' : 'totalValueLockedInUSD'].toString());
+            }
+        }
 
     });
 

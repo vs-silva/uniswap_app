@@ -5,7 +5,13 @@
     <table-component
         :cryptoTokens="cryptoTokens"
     />
-    
+
+    <pagination-component
+        :cryptoTokens="cryptoTokens"
+        :defaultPaginationAmount="defaultRequestAmount"
+        :paginationHandler="updateCryptoTokenRequestDTO"
+    />
+
   </div>
 </template>
 
@@ -17,13 +23,14 @@ import EventBusEngine from "./engines/event-bus-engine";
 import {CryptoTokensEventTypeConstants} from "./integration/cryto_tokens/core/constants/crypto-tokens-event-type.constants.ts";
 //--//
 import TableComponent from "./components/table-component/index.vue";
+import PaginationComponent from "./components/pagination-component/index.vue";
 
 const loading = ref<boolean>(false);
 
 const { useCryptoTokensStore } = Store;
 const cryptoTokenStore = useCryptoTokensStore();
-const { getCryptoTokens } = cryptoTokenStore
-const { cryptoTokens } = storeToRefs(cryptoTokenStore);
+const { getCryptoTokens, updateCryptoTokenRequestDTO } = cryptoTokenStore
+const { defaultRequestAmount, cryptoTokens } = storeToRefs(cryptoTokenStore);
 
 onBeforeMount(async () => {
   EventBusEngine.on(CryptoTokensEventTypeConstants.CRYPTO_TOKEN_SERVICE_REQUEST_STARTED, () => {

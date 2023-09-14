@@ -5,17 +5,29 @@
       <thead data-testid="table-component-head">
         <tr data-testid="table-component-head-column-row">
           <th data-testid="table-component-head-column"
-            v-for="(column) in tableColumns" :key="column.name"
+            v-for="column in tableColumns" :key="column.name"
             :id="column.id"
           >
             {{column.name}}
           </th>
         </tr>
       </thead>
-      <tbody data-testid="table-component-body"></tbody>
+      <tbody data-testid="table-component-body">
+        <tr data-testid="table-component-body-row"
+            v-for="cryptoToken in props.cryptoTokens"
+            :key="cryptoToken.id"
+            :id="cryptoToken.id"
+            class="text-left"
+            @click.prevent="() => { console.log('display details', cryptoToken.id) }"
+        >
+          <td>{{cryptoToken.name}}</td>
+          <td>{{cryptoToken.symbol}}</td>
+          <td>{{cryptoToken.totalSupplyAmount}}</td>
+          <td>{{cryptoToken.totalValueLockedInUSD}}</td>
+        </tr>
+      </tbody>
     </v-table>
 
-    {{props.cryptoTokens}}
   </div>
 </template>
 

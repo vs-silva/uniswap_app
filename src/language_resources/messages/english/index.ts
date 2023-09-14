@@ -10,6 +10,10 @@ export default {
                     totalValueInUSD: 'Total Locked Value in US Dollars'
                 }
             }
+        },
+        pagination: {
+            previous: 'Previews',
+            next: 'Next'
         }
     }
 };
