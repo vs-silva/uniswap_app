@@ -3,10 +3,8 @@
 
     <div v-if="totalItems">
       <v-btn variant="plain" data-testid="pagination-component-previous-button" @click.prevent="() => {
-        const temporaryAmount = totalItems - props.defaultPaginationAmount;
         paginationHandler(<CryptoTokenOptionalRequestDTO>{
-          amount: (temporaryAmount < 0) ? 0 : temporaryAmount,
-          skip: (temporaryAmount < 0) ? 0 : temporaryAmount
+          amount: -props.defaultPaginationAmount
         });
       }">
         {{translate(PaginationComponentConstants.LANGUAGE_RESOURCE_KEY_PREVIOUS)}}
@@ -14,8 +12,7 @@
 
       <v-btn variant="plain" data-testid="pagination-component-next-button" @click.prevent="() => {
         paginationHandler(<CryptoTokenOptionalRequestDTO>{
-          amount: props.defaultPaginationAmount,
-          skip: props.defaultPaginationAmount
+          amount: props.defaultPaginationAmount
         });
       }">
         {{translate(PaginationComponentConstants.LANGUAGE_RESOURCE_KEY_NEXT)}}
