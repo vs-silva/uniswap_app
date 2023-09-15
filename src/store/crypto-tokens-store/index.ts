@@ -6,8 +6,6 @@ import type {CryptoTokenOptionalRequestDTO} from "./dtos/crypto-token-optional-r
 import {CryptoTokensOrderByConstants} from "../../integration/cryto_tokens/core/constants/crypto-tokens-order-by.constants.ts";
 import {CryptoTokensOrderDirectionConstants} from "../../integration/cryto_tokens/core/constants/crypto-tokens-order-direction.constants.ts";
 
-
-
 export const CryptoTokensStoreIdentifier = 'crypto-tokens-store';
 
 export function CryptoTokensStore() {
@@ -30,6 +28,7 @@ export function CryptoTokensStore() {
 
     async function updateCryptoTokenRequestDTO(dto: CryptoTokenOptionalRequestDTO): Promise<void> {
         cryptoTokenRequestDTO.value = generateNewCryptoTokensRequestDTO(dto);
+        await getCryptoTokens();
     }
 
     function generateNewCryptoTokensRequestDTO(dto: CryptoTokenOptionalRequestDTO): CryptoTokensRequestDTO {
@@ -40,8 +39,6 @@ export function CryptoTokensStore() {
             skip: Math.max(0, (cryptoTokenRequestDTO.value.skip + (dto.amount  ?? 0)))
         };
     }
-
-
 
     return {
         defaultRequestAmount,
