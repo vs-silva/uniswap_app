@@ -29,13 +29,11 @@
 
 <script setup lang="ts">
 import {onBeforeMount, onDeactivated, ref} from "@vue/runtime-core";
-import {CryptoTokenDTO} from "../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
+import type {CryptoTokenDTO} from "../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
 import EventBusEngine from "../../engines/event-bus-engine";
-import {
-  CryptoTokenStoreEventTypeConstants
-} from "../../store/crypto-tokens-store/constants/crypto-token-store-event-type.constants.ts";
-import {translate} from "../../language_resources";
+import {CryptoTokenStoreEventTypeConstants} from "../../store/crypto-tokens-store/constants/crypto-token-store-event-type.constants.ts";
 import {DetailComponentConstants} from "./constants/detail-component.constants.ts";
+import {translate} from "../../language_resources";
 
 const display = ref<boolean>(false);
 const cryptoToken = ref<CryptoTokenDTO | null>(null);
@@ -50,8 +48,6 @@ onBeforeMount(() => {
 onDeactivated(() => {
   EventBusEngine.off(CryptoTokenStoreEventTypeConstants.DISPLAY_CRYPTO_TOKEN_DETAILS);
 });
-
-
 
 </script>
 
