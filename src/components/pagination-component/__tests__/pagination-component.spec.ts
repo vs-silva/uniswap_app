@@ -23,6 +23,8 @@ describe("Components: Pagination component tests", () => {
         }
     ];
 
+    const paginationAmount = 10;
+
     test('should contain component container', () => {
         const componentContainer = component.getByTestId('pagination-component-container');
         expect(componentContainer).toBeDefined();
@@ -43,13 +45,13 @@ describe("Components: Pagination component tests", () => {
     test('on click: previous button should ask for the previous amount of items', async () => {
 
         const fakePaginationHandler = vi.fn((dto: CryptoTokenOptionalRequestDTO) => {
-            expect(dto.amount).toEqual(0);
-            expect(dto.skip).toEqual(0);
+            expect(dto.amount).toEqual(-paginationAmount);
         });
 
         await component.rerender({
             cryptoTokens: fakeCryptoTokensCollection,
-            paginationHandler: fakePaginationHandler
+            paginationHandler: fakePaginationHandler,
+            defaultPaginationAmount: paginationAmount
         });
 
         const previousButton = component.getByTestId('pagination-component-previous-button');
@@ -60,12 +62,8 @@ describe("Components: Pagination component tests", () => {
     });
 
     test('on click: next button should ask for the next amount of items', async () => {
-
-        const paginationAmount = 10;
-
         const fakePaginationHandler = vi.fn((dto: CryptoTokenOptionalRequestDTO) => {
             expect(dto.amount).toEqual(paginationAmount);
-            expect(dto.skip).toEqual(paginationAmount);
         });
 
         await component.rerender({
