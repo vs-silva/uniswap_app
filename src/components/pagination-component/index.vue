@@ -1,7 +1,7 @@
 <template>
   <div data-testid="pagination-component-container">
 
-    <div v-if="totalItems">
+    <div v-if="props.cryptoTokens && props.cryptoTokens.length">
       <v-btn variant="plain" data-testid="pagination-component-previous-button" @click.prevent="() => {
         paginationHandler(<CryptoTokenOptionalRequestDTO>{
           amount: -props.defaultPaginationAmount
@@ -24,13 +24,11 @@
 
 <script setup lang="ts">
 
-import {PropType, watch, ref} from "@vue/runtime-core";
+import {PropType} from "@vue/runtime-core";
 import type {CryptoTokenDTO} from "../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
 import {PaginationComponentConstants} from "./constants/pagination-component.constants.ts";
 import {translate} from "../../language_resources";
 import type {CryptoTokenOptionalRequestDTO} from "../../store/crypto-tokens-store/dtos/crypto-token-optional-request.dto.ts";
-
-const totalItems = ref<number>(0);
 
 const props = defineProps({
   cryptoTokens: {
@@ -49,15 +47,6 @@ const props = defineProps({
     default: null
   }
 });
-
-watch(
-    () => props.cryptoTokens,
-    () => {
-      if(props.cryptoTokens && props.cryptoTokens.length){
-        totalItems.value = props.cryptoTokens.length;
-      }
-    }
-);
 
 </script>
 

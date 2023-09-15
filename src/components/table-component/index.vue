@@ -18,7 +18,15 @@
             :key="cryptoToken.id"
             :id="cryptoToken.id"
             class="text-left"
-            @click.prevent="() => { console.log('display details', cryptoToken.id) }"
+            @click.prevent="() => {
+              EventBusEngine.emit(CryptoTokenStoreEventTypeConstants.DISPLAY_CRYPTO_TOKEN_DETAILS, <CryptoTokenDTO>{
+                id: cryptoToken.id,
+                symbol: cryptoToken.symbol,
+                name: cryptoToken.name,
+                totalSupplyAmount: cryptoToken.totalSupplyAmount,
+                totalValueLockedInUSD: cryptoToken.totalValueLockedInUSD
+              });
+            }"
         >
           <td>{{cryptoToken.name}}</td>
           <td>{{cryptoToken.symbol}}</td>
@@ -36,6 +44,10 @@ import {PropType, watch, ref} from "@vue/runtime-core";
 import type {CryptoTokenDTO} from "../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
 import type {TableColumnDTO} from "./dtos/table-column.dto.ts";
 import {generateColumns} from "./utils";
+import EventBusEngine from "../../engines/event-bus-engine";
+import {
+  CryptoTokenStoreEventTypeConstants
+} from "../../store/crypto-tokens-store/constants/crypto-token-store-event-type.constants.ts";
 
 const tableColumns = ref<TableColumnDTO[] | null>([]);
 

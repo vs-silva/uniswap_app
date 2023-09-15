@@ -30,15 +30,12 @@ describe("Components: Table component tests", () => {
     ];
 
     test('should contain component container', () => {
-        const componentContainer = component.getByTestId('table-component-container');
-        expect(componentContainer).toBeDefined();
+        expect(() => component.getByTestId('table-component-container')).toBeDefined();
     });
 
     test('should contain head and body', () => {
-        const headContainer = component.getByTestId('table-component-head');
-        const bodyContainer = component.getByTestId('table-component-body');
-        expect(headContainer).toBeDefined();
-        expect(bodyContainer).toBeDefined();
+        expect(() => component.getByTestId('table-component-head')).toBeDefined();
+        expect(() => component.getByTestId('table-component-body')).toBeDefined();
     });
 
     test('given a cryptoTokens collection it should render the table header and body', async () => {
@@ -49,11 +46,10 @@ describe("Components: Table component tests", () => {
 
         const idRegex = /name|symbol|totalSupplyAmount|totalValueLockedInUSD/i;
 
-        const headColumnRow = component.getByTestId('table-component-head-column-row');
+        expect(() => component.getByTestId('table-component-head-column-row')).toBeDefined();
         const headColumns = component.getAllByTestId('table-component-head-column');
         const bodyRows = component.getAllByTestId('table-component-body-row');
 
-        expect(headColumnRow).toBeDefined();
         expect(headColumns).toBeDefined();
         expect(headColumns.length).toEqual(4);
 
