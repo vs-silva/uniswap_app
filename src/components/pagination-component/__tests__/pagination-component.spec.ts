@@ -26,8 +26,7 @@ describe("Components: Pagination component tests", () => {
     const paginationAmount = 10;
 
     test('should contain component container', () => {
-        const componentContainer = component.getByTestId('pagination-component-container');
-        expect(componentContainer).toBeDefined();
+        expect(() => component.getByTestId('pagination-component-container')).toBeDefined();
     });
 
     test('should contain previews and next buttons', async () => {
@@ -36,10 +35,8 @@ describe("Components: Pagination component tests", () => {
             cryptoTokens: fakeCryptoTokensCollection,
         });
 
-        const previousButton = component.getByTestId('pagination-component-previous-button');
-        const nextButton = component.getByTestId('pagination-component-next-button');
-        expect(previousButton).toBeDefined();
-        expect(nextButton).toBeDefined();
+        expect(() => component.getByTestId('pagination-component-previous-button')).toBeDefined();
+        expect(() => component.getByTestId('pagination-component-next-button')).toBeDefined();
     });
 
     test('on click: previous button should ask for the previous amount of items', async () => {

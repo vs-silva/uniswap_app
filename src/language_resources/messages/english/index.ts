@@ -14,6 +14,11 @@ export default {
         pagination: {
             previous: 'Previews',
             next: 'Next'
+        },
+        detail: {
+            button: {
+                close: 'Close'
+            }
         }
     }
 };
