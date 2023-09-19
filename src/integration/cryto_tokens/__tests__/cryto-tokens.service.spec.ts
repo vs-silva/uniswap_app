@@ -5,6 +5,7 @@ import {CryptoTokensOrderByConstants} from "../core/constants/crypto-tokens-orde
 import type {CryptoTokenDTO} from "../core/dtos/crypto-token.dto.ts";
 import type {CryptoTokensRequestDTO} from "../core/dtos/crypto-tokens-request.dto.ts";
 import CryptoTokens from "../index.ts";
+import {CryptoTokenDetailDTO} from "../core/dtos/crypto-token-detail.dto.ts";
 
 describe('Integration: Crypto-Tokens service tests', () => {
 
@@ -49,6 +50,48 @@ describe('Integration: Crypto-Tokens service tests', () => {
                 totalSupplyAmount: expect.any(Number),
                 totalValueLockedInUSD: expect.any(Number)
             })]));
+
+        });
+
+    },{
+        timeout: 30000
+    });
+
+    describe('getCryptoTokenDetails port tests', () => {
+
+        test('getCryptoTokenDetails should return a CryptoToken', async () => {
+
+            expect(CryptoTokens.getCryptoTokenDetails).toBeDefined();
+            expect(CryptoTokens.getCryptoTokenDetails).toBeInstanceOf(Function);
+
+            cryptoTokenRequestDTO.name = 'UMIIE COIN';
+            cryptoTokenRequestDTO.amount = 1;
+            cryptoTokenRequestDTO.skip = 0;
+
+
+            const spy = vi.spyOn(CryptoTokens, 'getCryptoTokenDetails');
+            const result = await CryptoTokens.getCryptoTokenDetails(cryptoTokenRequestDTO);
+
+            expect(spy).toHaveBeenCalledOnce();
+            expect(spy).toHaveBeenCalledWith(cryptoTokenRequestDTO);
+
+            expect(result).toBeTruthy();
+            expect(result?.id).toBeTruthy();
+            expect(result?.id).toMatch(idRegex);
+
+            expect(result).toStrictEqual(expect.objectContaining(<CryptoTokenDetailDTO>{
+                id: expect.any(String),
+                name: expect.any(String),
+                symbol: expect.any(String),
+                totalSupplyAmount: expect.any(Number),
+                totalValueLockedInUSD: expect.any(Number),
+                poolCount: expect.any(Number),
+                derivedETH: expect.any(Number),
+                feesInUSD: expect.any(Number),
+                untrackedVolumeInUSD: expect.any(Number),
+                volume: expect.any(Number),
+                volumeInUSD: expect.any(Number)
+            }));
 
         });
 

@@ -8,6 +8,7 @@ import EventBusEngine from "../../../engines/event-bus-engine/index.ts";
 import {CryptoTokensEventTypeConstants} from "../core/constants/crypto-tokens-event-type.constants.ts";
 import {CryptoTokensResourceConstants} from "../core/constants/crypto-tokens-resource.constants.ts";
 import {CryptoTokensResponseRequestedFieldsConstants} from "../core/constants/crypto-tokens-response-requested-fields.constants.ts";
+import {CryptoTokenDetailResponseDTO} from "../core/dtos/crypto-token-detail-response.dto.ts";
 
 export function CryptoTokensServiceReaderAdapter(): CryptoTokensServiceReaderDrivenPorts {
 
@@ -28,7 +29,17 @@ export function CryptoTokensServiceReaderAdapter(): CryptoTokensServiceReaderDri
         }
     }
 
+    async function getByName(dto: CryptoTokensRequestQueryDTO): Promise<CryptoTokenDetailResponseDTO | null> {
+        try {
+            const response = await engine.post(CryptoTokensResourceConstants.PROVIDER_ENDPOINT,dto);
+            return response[CryptoTokensResponseRequestedFieldsConstants.DATA][CryptoTokensResponseRequestedFieldsConstants.DATA][CryptoTokensResponseRequestedFieldsConstants.TOKENS][0] as CryptoTokenDetailResponseDTO;
+        } catch (error) {
+            return null;
+        }
+    }
+
     return {
-        get
+        get,
+        getByName
     };
 }

@@ -4,4 +4,5 @@ export interface CryptoTokenDTO {
     symbol: string;
     totalSupplyAmount: number;
     totalValueLockedInUSD: number;
+    
 }

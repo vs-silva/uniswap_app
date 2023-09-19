@@ -18,6 +18,12 @@ export default {
         detail: {
             button: {
                 close: 'Close'
+            },
+            list: {
+                name: 'Name',
+                symbol: 'Symbol',
+                totalSupply: 'Total Supply',
+                totalValueInUSD: 'Total Locked Value in US Dollars'
             }
         }
     }

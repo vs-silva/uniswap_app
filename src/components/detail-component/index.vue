@@ -8,12 +8,38 @@
       <v-card>
 
         <v-card-text data-testid="detail-component-body" v-if="cryptoToken">
-          {{cryptoToken}}
+
+          <div class="mb-4">
+            <div class="font-weight-normal">
+              <strong>{{  translate(DetailComponentConstants.LANGUAGE_RESOURCE_KEY_NAME) }}</strong>
+              <p>{{  cryptoToken.name }}</p>
+            </div>
+          </div>
+
+          <div>
+            <v-list lines="one">
+              <v-list-item>
+                <strong>{{  translate(DetailComponentConstants.LANGUAGE_RESOURCE_KEY_SYMBOL) }}</strong>
+                <p>{{  cryptoToken.symbol }}</p>
+              </v-list-item>
+
+              <v-list-item>
+                <strong>{{  translate(DetailComponentConstants.LANGUAGE_RESOURCE_KEY_TOTAL_SUPPLY) }}</strong>
+                <p>{{  cryptoToken.totalSupplyAmount }}</p>
+              </v-list-item>
+
+              <v-list-item>
+                <strong>{{  translate(DetailComponentConstants.LANGUAGE_RESOURCE_KEY_TOTAL_VALUE_IN_USD) }}</strong>
+                <p>{{  cryptoToken.totalValueLockedInUSD }}</p>
+              </v-list-item>
+            </v-list>
+          </div>
+
         </v-card-text>
 
         <v-card-actions>
           <v-btn data-testid="detail-component-close-button"
-                 color="primary"
+                 variant="plain"
                  block
                  @click="() => {
                     display = false;
