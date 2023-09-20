@@ -1,3 +1,23 @@
 export const DetailComponentConstants = {
-    LANGUAGE_RESOURCE_KEY_CLOSE: 'component.detail.button.close'
+    LANGUAGE_RESOURCE_KEY_CLOSE: 'component.detail.button.close',
+    LANGUAGE_RESOURCE_KEY_NAME: 'component.detail.list.name',
+    LANGUAGE_RESOURCE_KEY_SYMBOL: 'component.detail.list.symbol',
+    LANGUAGE_RESOURCE_KEY_TOTAL_SUPPLY: 'component.detail.list.totalSupply',
+    LANGUAGE_RESOURCE_KEY_TOTAL_VALUE_IN_USD: 'component.detail.list.totalValueInUSD',
+    LANGUAGE_RESOURCE_KEY_FEES_IN_USD: 'component.detail.list.feesInUSD',
+    LANGUAGE_RESOURCE_KEY_VOLUME: 'component.detail.list.volume',
+    LANGUAGE_RESOURCE_KEY_VOLUME_IN_USD: 'component.detail.list.volumeInUSD',
+    LANGUAGE_RESOURCE_KEY_UNTRACKED_VOLUME_IN_USD: 'component.detail.list.untrackedVolumeInUSD',
+    LANGUAGE_RESOURCE_KEY_POOL_COUNT: 'component.detail.list.poolCount',
+    LANGUAGE_RESOURCE_KEY_DERIVED_ETH: 'component.detail.list.derivedETH',
+    LANGUAGE_RESOURCE_KEY_NAME_DESCRIPTION: 'component.detail.list.name_description',
+    LANGUAGE_RESOURCE_KEY_SYMBOL_DESCRIPTION: 'component.detail.list.symbol_description',
+    LANGUAGE_RESOURCE_KEY_TOTAL_SUPPLY_DESCRIPTION: 'component.detail.list.totalSupply_description',
+    LANGUAGE_RESOURCE_KEY_TOTAL_VALUE_IN_USD_DESCRIPTION: 'component.detail.list.totalValueInUSD_description',
+    LANGUAGE_RESOURCE_KEY_FEES_IN_USD_DESCRIPTION: 'component.detail.list.feesInUSD_description',
+    LANGUAGE_RESOURCE_KEY_VOLUME_DESCRIPTION: 'component.detail.list.volume_description',
+    LANGUAGE_RESOURCE_KEY_VOLUME_IN_USD_DESCRIPTION: 'component.detail.list.volumeInUSD_description',
+    LANGUAGE_RESOURCE_KEY_UNTRACKED_VOLUME_IN_USD_DESCRIPTION: 'component.detail.list.untrackedVolumeInUSD_description',
+    LANGUAGE_RESOURCE_KEY_POOL_COUNT_DESCRIPTION: 'component.detail.list.poolCount_description',
+    LANGUAGE_RESOURCE_KEY_DERIVED_ETH_DESCRIPTION: 'component.detail.list.derivedETH_description'
 } as const;

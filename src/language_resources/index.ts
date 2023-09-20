@@ -12,7 +12,7 @@ const engine = createI18n({
 });
 
 export function translate(key: string): string {
-    if(!key.trim()) {
+    if(!key?.trim()) {
         return '';
     }
     return engine.global.t(key);

@@ -12,7 +12,10 @@
         :paginationHandler="updateCryptoTokenRequestDTO"
     />
 
-    <detail-component />
+    <detail-component
+        :cryptoTokenDetails="cryptoTokenDetails"
+        :cryptoTokenDetailsRequestActionHandler="getCryptoTokenDetails"
+    />
 
   </div>
 </template>
@@ -32,8 +35,8 @@ const loading = ref<boolean>(false);
 
 const { useCryptoTokensStore } = Store;
 const cryptoTokenStore = useCryptoTokensStore();
-const { getCryptoTokens, updateCryptoTokenRequestDTO } = cryptoTokenStore
-const { defaultRequestAmount, cryptoTokens } = storeToRefs(cryptoTokenStore);
+const { getCryptoTokens, updateCryptoTokenRequestDTO, getCryptoTokenDetails } = cryptoTokenStore
+const { defaultRequestAmount, cryptoTokens, cryptoTokenDetails } = storeToRefs(cryptoTokenStore);
 
 onBeforeMount(async () => {
   EventBusEngine.on(CryptoTokensEventTypeConstants.CRYPTO_TOKEN_SERVICE_REQUEST_STARTED, () => {

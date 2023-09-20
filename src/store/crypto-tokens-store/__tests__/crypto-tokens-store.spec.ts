@@ -7,13 +7,14 @@ import {CryptoTokensOrderDirectionConstants} from "../../../integration/cryto_to
 import type {CryptoTokenDTO} from "../../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
 import type{CryptoTokenOptionalRequestDTO} from "../dtos/crypto-token-optional-request.dto.ts";
 import type {CryptoTokensRequestDTO} from "../../../integration/cryto_tokens/core/dtos/crypto-tokens-request.dto.ts";
+import type {CryptoTokenDetailDTO} from "../../../integration/cryto_tokens/core/dtos/crypto-token-detail.dto.ts";
 
 describe('Store: Crypto tokens store tests', () => {
 
     setActivePinia(createPinia());
     const cryptoTokensStore = Store.useCryptoTokensStore();
-    const { defaultRequestAmount, cryptoTokenRequestDTO, cryptoTokens } = storeToRefs(cryptoTokensStore);
-    const { getCryptoTokens, updateCryptoTokenRequestDTO } = cryptoTokensStore;
+    const { defaultRequestAmount, cryptoTokenRequestDTO, cryptoTokens, cryptoTokenDetails } = storeToRefs(cryptoTokensStore);
+    const { getCryptoTokens, updateCryptoTokenRequestDTO, getCryptoTokenDetails } = cryptoTokensStore;
 
     const initialCryptoTokensRequestDTO = <CryptoTokensRequestDTO>{
         name: '',
@@ -93,6 +94,41 @@ describe('Store: Crypto tokens store tests', () => {
 
         expect(cryptoTokenRequestDTO.value.amount).toEqual(defaultRequestAmount.value);
         expect(cryptoTokenRequestDTO.value.skip).toEqual(tempSkip);
+
+    });
+
+    test('getCryptoTokenDetails should return a CryptoTokenDetailDTO and update cryptoTokenDetails', async () => {
+
+        expect(getCryptoTokenDetails).toBeDefined();
+        expect(getCryptoTokenDetails).toBeInstanceOf(Function);
+
+        expect(cryptoTokenDetails).toBeDefined();
+        expect(cryptoTokenDetails.value).toBeNull();
+
+        const requestedCryptoTokenName = 'UMIIE COIN';
+
+        const spy = vi.fn(getCryptoTokenDetails);
+        await spy(requestedCryptoTokenName);
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(requestedCryptoTokenName);
+
+        expect(cryptoTokenDetails.value).toBeDefined();
+        expect(cryptoTokenDetails.value?.name).toEqual(requestedCryptoTokenName);
+
+        expect(cryptoTokenDetails.value).toStrictEqual(expect.objectContaining(<CryptoTokenDetailDTO>{
+            id: expect.any(String),
+            name: expect.any(String),
+            symbol: expect.any(String),
+            totalSupplyAmount: expect.any(Number),
+            totalValueLockedInUSD: expect.any(Number),
+            poolCount: expect.any(Number),
+            derivedETH: expect.any(Number),
+            feesInUSD: expect.any(Number),
+            untrackedVolumeInUSD: expect.any(Number),
+            volume: expect.any(Number),
+            volumeInUSD: expect.any(Number)
+        }));
 
     });
 
