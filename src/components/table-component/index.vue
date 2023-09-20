@@ -1,14 +1,14 @@
 <template>
   <div data-testid="table-component-container">
 
-    <v-table>
+    <v-table :hover="true">
       <thead data-testid="table-component-head">
         <tr data-testid="table-component-head-column-row">
           <th data-testid="table-component-head-column"
             v-for="column in tableColumns" :key="column.name"
             :id="column.id"
           >
-            {{column.name}}
+            <span class="font-weight-bold">{{column.name}}</span>
           </th>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
             v-for="cryptoToken in props.cryptoTokens"
             :key="cryptoToken.id"
             :id="cryptoToken.id"
-            class="text-left"
+            class="text-left u-cursor_pointer"
             @click.prevent="() => {
               EventBusEngine.emit(CryptoTokenStoreEventTypeConstants.DISPLAY_CRYPTO_TOKEN_DETAILS, <CryptoTokenDTO>{
                 id: cryptoToken.id,
@@ -69,5 +69,4 @@ watch(
 </script>
 
 <style scoped lang="scss">
-
 </style>

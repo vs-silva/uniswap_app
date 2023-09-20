@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from "pinia";
-import './style.css';
+import './assets/styles/index.scss';
 
 // Vuetify
 import 'vuetify/styles';
