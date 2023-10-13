@@ -10,9 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import {PropType, ref, watch} from "@vue/runtime-core";
+import { PropType, ref, watch, watchEffect} from "@vue/runtime-core";
 import type {CryptoTokenDTO} from "../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
-import {generateGraph, updateGraph} from "./utils";
+import {generateGraph} from "./utils";
+
 
 const canvas = ref<HTMLCanvasElement | null>(null);
 
@@ -24,12 +25,19 @@ const props = defineProps({
   }
 });
 
-generateGraph(canvas);
+
+const unWatchCanvas = watch(
+    () => canvas.value,
+    () => {
+      generateGraph(canvas.value)
+      unWatchCanvas();
+    }
+);
 
 watch(
     () => props.cryptoTokens,
     (cryptoTokens: CryptoTokenDTO[] | null) => {
-      updateGraph(cryptoTokens);
+      console.log(cryptoTokens)
     }
 );
 

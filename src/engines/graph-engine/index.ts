@@ -17,6 +17,11 @@ export function GraphEngine(): GraphEngineDriverPorts {
             data: graphData,
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
                 scales: {
                     x: {
                         beginAtZero: true
@@ -27,10 +32,11 @@ export function GraphEngine(): GraphEngineDriverPorts {
                 }
             }
         });
-
     }
 
     function updateGraph(graphData: GraphEngineDataDTO): void {
+
+        console.log(engine);
 
         if(!engine || !engine.canvas) {
             return;
