@@ -1,18 +1,19 @@
-import Chart, {ChartType, ChartTypeRegistry, DefaultDataPoint} from 'chart.js/auto';
+import Chart, {ChartType, ChartTypeRegistry, DefaultDataPoint, registerables} from 'chart.js/auto';
 import type {GraphEngineDriverPorts} from "./graph-engine-driver.ports.ts";
 import type {GraphEngineDataDTO} from "./graph-engine-data.dto.ts";
 
 export function GraphEngine(): GraphEngineDriverPorts {
 
-    let engine: Chart<ChartType,DefaultDataPoint<ChartType>,unknown> | null = null;
+    Chart.register(...registerables);
+    let graphInstance: Chart<ChartType,DefaultDataPoint<ChartType>,unknown> | null = null;
 
     function generateGraph(canvas: HTMLCanvasElement, graphType: string, graphData: GraphEngineDataDTO): void {
 
-        if(engine) {
-            engine.destroy();
+        if(graphInstance) {
+            graphInstance.destroy();
         }
 
-        engine = new Chart(canvas, {
+        graphInstance =  new Chart(canvas, {
             type: graphType as keyof ChartTypeRegistry,
             data: graphData,
             options: {
@@ -36,14 +37,12 @@ export function GraphEngine(): GraphEngineDriverPorts {
 
     function updateGraph(graphData: GraphEngineDataDTO): void {
 
-        console.log(engine);
-
-        if(!engine || !engine.canvas) {
+        if(!graphInstance || !graphInstance.canvas) {
             return;
         }
 
-        engine.data = graphData;
-        engine.update();
+        graphInstance.data = graphData;
+        graphInstance.update();
     }
 
     return {
