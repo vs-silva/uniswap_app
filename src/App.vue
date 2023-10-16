@@ -17,6 +17,10 @@
         :cryptoTokenDetailsRequestActionHandler="getCryptoTokenDetails"
     />
 
+    <graph-component
+        :cryptoTokens="cryptoTokens"
+    />
+
   </div>
 </template>
 
@@ -30,6 +34,7 @@ import {CryptoTokensEventTypeConstants} from "./integration/cryto_tokens/core/co
 import TableComponent from "./components/table-component/index.vue";
 import PaginationComponent from "./components/pagination-component/index.vue";
 import DetailComponent from "./components/detail-component/index.vue";
+import GraphComponent from "./components/graph-component/index.vue"
 
 const loading = ref<boolean>(false);
 
