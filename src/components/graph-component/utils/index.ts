@@ -32,12 +32,14 @@ function processDatasets(cryptoTokens: CryptoTokenDTO[]): GraphEngineDatasetDTO[
         <GraphEngineDatasetDTO>{
             label: translate(GraphComponentConstants.LANGUAGE_RESOURCE_KEY_TOTAL_VALUE_IN_USD),
             data: cryptoTokens.map((cryptoToken: CryptoTokenDTO) =>(cryptoToken.totalValueLockedInUSD)),
-            borderWidth: 1
+            borderWidth: 1,
+            borderRadius: 0
         },
         <GraphEngineDatasetDTO>{
             label: translate(GraphComponentConstants.LANGUAGE_RESOURCE_KEY_TOTAL_SUPPLY),
             data: cryptoTokens.map((cryptoToken: CryptoTokenDTO) =>(cryptoToken.totalSupplyAmount)),
-            borderWidth: 1
+            borderWidth: 1,
+            borderRadius: 0
         }
     ]
 }

@@ -1,5 +1,5 @@
-import {afterAll, beforeAll, vi, describe, expect, test} from "vitest";
-import {cleanup, render, fireEvent ,RenderResult} from "@testing-library/vue";
+import {afterAll, beforeAll, describe, expect, test} from "vitest";
+import {cleanup, render, RenderResult} from "@testing-library/vue";
 import {faker} from "@faker-js/faker";
 import GraphComponent from "../index.vue";
 import type {CryptoTokenDTO} from "../../../integration/cryto_tokens/core/dtos/crypto-token.dto.ts";
@@ -44,8 +44,6 @@ describe("Components: Graph component tests", () => {
         expect(canvas).toBeDefined();
 
         expect(() => component.getByTestId('graph-component-canvas')).toBeTruthy();
-
-        component.debug();
 
     });
 
